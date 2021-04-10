@@ -1,0 +1,74 @@
+<div class="card mt-5">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link" [ngClass]="{'active': !isViewMember}" ngClass="activeViewMember" (click)="goViewMember()" >View Members</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [ngClass]="{'active': isViewMember}" (click)="goAddMember()">Add Member</a>
+      </li>
+    </ul>
+  </div>
+  <app-alert> </app-alert>
+
+  <ng-template [ngIf]="!isViewMember">
+    <ngx-spinner type="ball-atom"></ngx-spinner>
+
+    <div class="card-body">
+        <div class="card-columns">
+          <div class="card" style="width: 18rem;" *ngFor="let user of members">
+            <div class="card-body">
+              <h5 class="card-title">{{user.username}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{user.address}}</h6>
+              <p class="card-text">20000</p>
+              <a href="#" class="card-link">{{user.phone}}</a>
+            </div>
+          </div>
+
+          <!--<div class="card" *ngFor="let user of members">-->
+            <!--<img class="card-img-top" src="assets/profile.png"  alt="Card image cap">-->
+            <!--<div class="card-body">-->
+              <!--<h5 class="card-title">{{user.username}}</h5>-->
+              <!--<p class="card-text">{{user.address}}</p>-->
+            <!--</div>-->
+            <!--<div class="card-footer">-->
+              <!--<small class="text-muted">{{user.phone}}</small>-->
+              <!--&lt;!&ndash;<small class="text-muted">Last updated 3 mins ago</small>&ndash;&gt;-->
+            <!--</div>-->
+          <!--</div>-->
+        </div>
+      </div>
+  </ng-template>
+
+  <ng-template [ngIf]="isViewMember">
+    <h5 class="card-title text-center">Add new member</h5>
+    <div class="card-body row justify-content-center align-items-center">
+      <form>
+        <div class="form-row">
+
+          <div class="form-group col-md-6">
+            <label for="username">User name</label>
+            <input type="text" class="form-control" id="username" [(ngModel)]="member.username" name="username" placeholder="John Doe">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Email</label>
+            <input type="email" class="form-control" id="inputEmail4" [(ngModel)]="member.email" name="email" placeholder="john@doe.com">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Password</label>
+            <input type="password" class="form-control" id="inputPassword4" [(ngModel)]="member.password" name="password" placeholder="*********">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" id="phone" [(ngModel)]="member.phone" name="phone" placeholder="019** ****">
+          </div>
+          <ngx-spinner type="ball-atom"></ngx-spinner>
+          <div class="form-group">
+            <input type="submit" name="submit" class="btn btn-info btn-md" (click)="addMember(member)" value="Add member">
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+</div>

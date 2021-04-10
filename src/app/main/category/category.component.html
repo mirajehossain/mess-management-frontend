@@ -1,0 +1,47 @@
+<div class="card mt-5">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link" [ngClass]="{'active': !isViewCategory}" ngClass="activeViewCategory" (click)="goViewCategory()" >View Categories</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [ngClass]="{'active': isViewCategory}" (click)="goAddCategory()"> {{ isEdit ||'Add'}} Category</a>
+      </li>
+    </ul>
+  </div>
+
+
+  <ng-template [ngIf]="!isViewCategory">
+    <div class="card-body">
+      <ngx-spinner type="ball-atom"></ngx-spinner>
+      <div class="card" style="width: 25rem;">
+        <ul *ngIf="categories; else noData" class="list-group list-group-flush">
+          <li  *ngFor="let item of categories" class="list-group-item">{{item.name}}   <span class="badge badge-secondary" *ngIf="item.isMeal==1"> default</span>
+            <a class="fa fa-edit float-right" (click)="edit(item)"></a></li>
+        </ul>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #noData>
+    No category
+  </ng-template>
+
+  <ng-template [ngIf]="isViewCategory">
+    <div class="card-body">
+      <form style="width: 25rem;">
+        <div class="form-group" >
+          <label for="name">Category name</label>
+          <input type="text" class="form-control" id="name" name="name" [(ngModel)]="category.name" placeholder="category name ">
+        </div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="isMeal" [(ngModel)]="category.isMeal" id="isMeal">
+          <label class="form-check-label" for="isMeal" >Is Default Meal</label>
+        </div>
+        <ngx-spinner type="ball-atom"></ngx-spinner>
+        <button type="submit" class="btn btn-info" *ngIf="!isEdit" (click)="addCategory(category)">Submit</button>
+        <button type="submit" class="btn btn-info" *ngIf="isEdit" (click)="updateCategory()">Update</button>
+      </form>
+    </div>
+  </ng-template>
+
+</div>

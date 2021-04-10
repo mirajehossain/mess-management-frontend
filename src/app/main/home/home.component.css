@@ -1,0 +1,22 @@
+.grafico {
+  min-width: 310px;
+  max-width: 400px;
+  height: 280px;
+  margin: 0 auto
+}
+
+.main-header {
+  font-size: x-large;
+  color : #888;
+  font-family: Verdana;
+  margin-bottom: 20px;
+}
+
+.destaque {
+  color: #f88;
+  font-weight: bolder;
+}
+
+.highcharts-tooltip h3 {
+  margin: 0.3em 0;
+}
